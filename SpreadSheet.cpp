@@ -57,6 +57,7 @@ std::string SpreadSheet::processCommand(const std::string& command) {
     return result;
 }
 
+
 // Clear the entire SpreadSheet
 void SpreadSheet::clearSpreadSheet() {
     for (int i = 0; i < 20; ++i) {
