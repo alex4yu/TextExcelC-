@@ -2,6 +2,7 @@
 #include "SpreadSheetLocation.h"
 #include "EmptyCell.h"
 #include "TextCell.h"
+#include "ValueCell.h"
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -48,6 +49,13 @@ std::string SpreadSheet::processCommand(const std::string& command) {
         delete excel[location.getRow()][location.getCol()];
         int start = command.find("\"") + 1;
         excel[location.getRow()][location.getCol()] = new TextCell(command.substr(start, command.length() - 1 - start ));
+        result = getGridText();
+    } else if (command.find("(") != -1) {
+        //create text cell at given location
+        SpreadSheetLocation location(command.substr(0,command.find(" ")));
+        delete excel[location.getRow()][location.getCol()];
+        int start = command.find("(") + 1;
+        excel[location.getRow()][location.getCol()] = new ValueCell(command.substr(start, command.length() - 1 - start ));
         result = getGridText();
     }
     else{
